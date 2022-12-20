@@ -25,8 +25,8 @@ struct element_pasien {
 
 
 struct element_jadwal_dokter {
-	infotype info;
-	adr next;
+	jadwal_dokter info;
+	adr_dokter next;
 };
 
 struct ListPasien{
