@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+#define cin(x) getline(cin,x)
 
 typedef struct element_dokter *adr_dokter;
 typedef struct element_pasien *adr_pasien;

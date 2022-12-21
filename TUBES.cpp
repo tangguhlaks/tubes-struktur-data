@@ -6,7 +6,7 @@ void createListPasien(ListPasien &L){
 }
 
 adr_pasien createElemenPasien(pasien data){
-    adr_pasien p = new pasien;
+    adr_pasien p = new element_pasien;
     p->info = data;
     p->next = NULL;
     return p; 
