@@ -19,24 +19,28 @@ struct dokter{
 
 struct element_pasien {
 	pasien info;
-	adr_pasien next, prev;
+	adr_pasien next;
 
 };
 
 
 struct element_dokter {
 	dokter info;
-	adr_dokter next;
+	adr_dokter next, prev;
 	adr_pasien child;
 };
 
 struct ListPasien{
-	adr_pasien first, last;
+	adr_pasien first;
 };
 
-struct ListJadwalDokter{
-	adr_dokter first;
+struct ListDokter{
+	adr_dokter first, last;
 };
+
+//Farhan
+void createListPasien(ListPasien &L);
+adr_pasien createElemenPasien(pasien data);
 
 
 #endif
