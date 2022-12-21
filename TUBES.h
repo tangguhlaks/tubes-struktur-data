@@ -15,29 +15,32 @@ struct pasien{
 
 struct dokter{
 	string tanggal,nama,spesialisasi;
-	int kuota,jam_praktek_start,jam_praktek_end;
+	int kuota,jam_praktek_start,jam_praktek_end,id;
 };
 
 struct element_pasien {
 	pasien info;
-	adr_pasien next, prev;
+	adr_pasien next;
 
 };
 
 
 struct element_dokter {
 	dokter info;
-	adr_dokter next;
+	adr_dokter next,prev;
 	adr_pasien child;
 };
 
 struct ListPasien{
-	adr_pasien first, last;
+	adr_pasien first;
 };
 
-struct ListJadwalDokter{
-	adr_dokter first;
+struct ListDokter{
+	adr_dokter first,last;
 };
 
-
+void creatListDokter(ListDokter &LD);
+adr_dokter createElementDokter(dokter data);
+void insertFirstDokter(ListDokter &LD,adr_dokter data);
+void showDokter(ListDokter LD);
 #endif
