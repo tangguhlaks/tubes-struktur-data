@@ -2,5 +2,5 @@
 #include "TUBES.cpp"
 
 int main(){
-	cout << "Hello Wolrd" << endl;
+	cout << "Hed" << endl;
 }

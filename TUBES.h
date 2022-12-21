@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef struct jadwal_dokter *adr_dokter;
+typedef struct element_dokter *adr_dokter;
 typedef struct element_pasien *adr_pasien;
 
 struct pasien{
@@ -12,7 +12,7 @@ struct pasien{
 	string nama, jenis, hasil;
 };
 
-struct jadwal_dokter{
+struct dokter{
 	string tanggal,nama,spesialisasi;
 	int kuota,jam_praktek_start,jam_praktek_end;
 };
@@ -24,9 +24,10 @@ struct element_pasien {
 };
 
 
-struct element_jadwal_dokter {
-	jadwal_dokter info;
+struct element_dokter {
+	dokter info;
 	adr_dokter next;
+	adr_pasien child;
 };
 
 struct ListPasien{
