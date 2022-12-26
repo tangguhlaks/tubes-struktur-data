@@ -38,9 +38,13 @@ struct ListPasien{
 struct ListDokter{
 	adr_dokter first,last;
 };
-
+//dokter
 void creatListDokter(ListDokter &LD);
 adr_dokter createElementDokter(dokter data);
 void insertFirstDokter(ListDokter &LD,adr_dokter data);
 void showDokter(ListDokter LD);
+//pasien
+void createPasien(ListPasien &LP);
+adr_pasien  createElementPasien(pasien data);
+
 #endif

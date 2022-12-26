@@ -1,5 +1,5 @@
 #include "TUBES.h"
-
+//Tangguh
 void creatListDokter(ListDokter &LD){
 	(LD).first = NULL;
 }
@@ -41,4 +41,16 @@ void showDokter(ListDokter LD){
 	}else {
 		cout << "Data Dokter Kosong :( " << endl;
 	}
+}
+
+//Farhan
+void createPasien(ListPasien &LP){
+	(LP).first =NULL;
+}
+
+adr_pasien  createElementPasien(pasien data){
+	adr_pasien p =  new element_pasien;
+	(p)->next = NULL;
+	(p)->info = data;
+	return p;
 }
