@@ -54,3 +54,23 @@ adr_pasien  createElementPasien(pasien data){
 	(p)->info = data;
 	return p;
 }
+
+void insertConnect(ListDokter &LD, adr_pasien newPasien){
+
+}
+
+void deletePasienByID(ListDokter &LD, int id){
+
+}
+
+void deletePasienByNama(ListDokter &LD, string nama){
+
+}
+
+void showPasien(ListDokter LD){
+
+}
+
+void showPasienByTanggal(ListDokter LD){
+	
+}
