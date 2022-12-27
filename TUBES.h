@@ -38,13 +38,22 @@ struct ListPasien{
 struct ListDokter{
 	adr_dokter first,last;
 };
+
 //dokter
 void creatListDokter(ListDokter &LD);
 adr_dokter createElementDokter(dokter data);
 void insertFirstDokter(ListDokter &LD,adr_dokter data);
 void showDokter(ListDokter LD);
+void deleteDokter(ListDokter &LD, string nama,string tanggal);
+bool checkDokter(ListDokter LD,string spesialisasi,string tanggal);
+adr_dokter findDokter(ListDokter LD,string spesialisasi,string tanggal);
 //pasien
 void createPasien(ListPasien &LP);
-adr_pasien  createElementPasien(pasien data);
+adr_pasien createElementPasien(pasien data);
+void insertConnect(ListDokter &LD, adr_pasien newPasien,string spesialisasi,string tanggal);
+void deletePasienByID(ListDokter &LD, int id);
+void deletePasienByNama(ListDokter &LD, string nama);
+void showPasien(ListDokter LD);
+void showPasienByTanggal(ListDokter LD);
 
 #endif
