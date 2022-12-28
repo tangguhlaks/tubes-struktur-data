@@ -12,9 +12,10 @@ int main(){
 		cout << "2.Pendaftaran Pasien" << endl;
 		cout << "3.Jadwal Dokter" << endl;
 		cout << "4.Lihat Semua Pasien" << endl;
-		cout << "5.Hapus Pasien by ID" << endl;
-		cout << "6.Hapus Pasien by Nama" << endl;
-		cout << "7.Hapus Jadwal Dokter" << endl;
+		cout << "5.Lihat Pasien By tanggal" << endl;
+		cout << "6.Hapus Pasien by ID" << endl;
+		cout << "7.Hapus Pasien by Nama" << endl;
+		cout << "8.Hapus Jadwal Dokter" << endl;
 		cout << "0.Keluar" << endl;
 		cout << "pilihan : "; 
 		cin >> x;
@@ -27,8 +28,8 @@ int main(){
 			cout << "Nama : ";cin(d.nama);
 			cout << "Spesialisasi : ";cin(d.spesialisasi);
 			cout << "Tanggal (dd-mm-yyyy) : ";cin(d.tanggal);
-			cout << "Jam Praktek (Start) : ";cin >> d.jam_praktek_start;cin.ignore();
-			cout << "Jam Praktek (End) : ";cin >> d.jam_praktek_end;cin.ignore();
+			cout << "Jam Praktek (Start) : ";cin(d.jam_praktek_start);
+			cout << "Jam Praktek (End) : ";cin(d.jam_praktek_end);
 			cout << "Kuota Pasien : ";cin >> d.kuota;cin.ignore();
 			adr_dokter newdata = createElementDokter(d);
 			insertFirstDokter(LD,newdata);
@@ -39,7 +40,7 @@ int main(){
 			cout << "Nama : ";cin(p.nama);
 			cout << "Jenis Pasien (BPJS atau non BPJS) : ";cin(p.jenis);
 			string dokter_cari,tanggal;
-			cout << "Dokter Penyakit yang di inginkan : ";cin(dokter_cari);
+			cout << "Dokter spesialis yang diinginkan : ";cin(dokter_cari);
 			cout << "Tanggal : ";cin(tanggal);
 			adr_pasien newdata = createElementPasien(p);
 			insertConnect(LD,newdata, dokter_cari,tanggal);
@@ -47,14 +48,18 @@ int main(){
 			showDokter(LD);	
 		}else if (x==4){
 			showPasien(LD);
-		}else if(x==5){
+		}else if (x==5){
+			string tanggal;
+			cout << "Tanggal : ";cin(tanggal);
+			showPasienByTanggal(LD, tanggal);
+		}else if(x==6){
 			int id;
 			cout << "ID : ";cin >> id;cin.ignore();
-			//deletePasienByID(LD,id);
-		}else if(x==6){
+			deletePasienByID(LD,id);
+		}else if(x==7){
 			string nama;
 			cout << "Nama : ";cin(nama);
-			//deletePasienByID(LD,nama);
+			deletePasienByNama(LD,nama);
 		}else if(x==0){
 			cout << "Sampai Jumpa :)" << endl;
 			break;

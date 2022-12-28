@@ -14,8 +14,8 @@ struct pasien{
 };
 
 struct dokter{
-	string tanggal,nama,spesialisasi;
-	int kuota,jam_praktek_start,jam_praktek_end,id;
+	string tanggal,nama,spesialisasi,jam_praktek_start,jam_praktek_end;
+	int kuota,id;
 };
 
 struct element_pasien {

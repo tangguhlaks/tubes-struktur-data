@@ -180,25 +180,26 @@ void deletePasienByNama(ListDokter &LD, string nama){
 		adr_dokter mydokter;
 		while (q!=NULL) {
 			adr_pasien d = (q)->child;
-			do{
-				if((d)->info.nama == nama){
-					mypasien = d;
-					mydokter = q;
-					if(mypasien == (mydokter)->child){
-						(mydokter)->child = NULL;
-					}else{
-						adr_pasien c = (mydokter)->child;
-						while ((c)->next != mypasien) {
-							c = (c)->next;
+			if((q)->child != NULL){
+				do{
+					if((d)->info.nama == nama){
+						mypasien = d;
+						mydokter = q;
+						if(mypasien == (mydokter)->child){
+							(mydokter)->child = NULL;
+						}else{
+							adr_pasien c = (mydokter)->child;
+							do{
+								c = (c)->next;
+							}while (c != mypasien);
+							(c)->next = (mypasien)->next;
+							(mypasien)->next = NULL;
 						}
-						(c)->next = (mypasien)->next;
-						(mypasien)->next = NULL;
-					}
 
-				}
-				d = (d)->next;
-			}while(d != (q)->child);
-			
+					}
+					d = (d)->next;
+				}while(d != (q)->child && (q)->child != NULL);
+			}
 			q = (q)->next;
 		}
 		cout << "Pasien berhasil di hapus" << endl;
@@ -212,13 +213,18 @@ void showPasien(ListDokter LD){
 	if(q!=NULL){
 		cout << "=== Data Pasien ===" << endl;
 		while (q!=NULL) {
-			adr_pasien d = (q)->child;
-			do{
-				cout << "ID : " << (d)->info.id << endl;
-				cout << "Nama : " << (d)->info.nama << endl;
-				cout << "Jenis Pasien (BPJS atau non BPJS) : "<<(d)->info.jenis << endl << endl;
-				d = (d)->next;
-			}while(d != (q)->child);
+			if((q)->child != NULL){
+				adr_pasien d = (q)->child;
+				do{
+					cout << "ID : " << (d)->info.id << endl;
+					cout << "Nama : " << (d)->info.nama << endl;
+					cout << "Jenis Pasien (BPJS atau non BPJS) : "<<(d)->info.jenis << endl;
+					cout << "Nama Dokter : " << (q)->info.nama << endl;
+					cout << "Spesialisasi : " << (q)->info.spesialisasi << endl << endl;
+					d = (d)->next;
+				}while(d != (q)->child);
+				
+			}
 			q = (q)->next;
 		}
 		cout << endl;
@@ -228,6 +234,29 @@ void showPasien(ListDokter LD){
 
 }
 
-void showPasienByTanggal(ListDokter LD){
-	
+void showPasienByTanggal(ListDokter LD, string tanggal){
+	adr_dokter q = (LD).first;
+	if(q!=NULL){
+		cout << "=== Data Pasien ===" << endl;
+		while (q!=NULL) {
+			if((q)->child != NULL){
+				adr_pasien d = (q)->child;
+				do{
+					if((q)->info.tanggal == tanggal){
+						cout << "ID : " << (d)->info.id << endl;
+						cout << "Nama : " << (d)->info.nama << endl;
+						cout << "Jenis Pasien (BPJS atau non BPJS) : "<<(d)->info.jenis << endl;
+						cout << "Nama Dokter : " << (q)->info.nama << endl;
+						cout << "Spesialisasi : " << (q)->info.spesialisasi << endl << endl;
+					}
+					d = (d)->next;
+				}while(d != (q)->child);
+				
+			}
+			q = (q)->next;
+		}
+		cout << endl;
+	}else {
+		cout << "Data Pasien Kosong :( " << endl;
+	}
 }
