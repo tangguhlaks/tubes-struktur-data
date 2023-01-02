@@ -18,6 +18,8 @@ void insertFirstDokter(ListDokter &LD,adr_dokter data){
 		((LD).first)->prev = data;
 		(LD).first = data;
 	}else{
+		(data)->next = NULL;
+		(data)->prev = NULL;
 		(LD).first = data;
 		(LD).last = data;
 	}
@@ -74,26 +76,36 @@ bool checkDokter(ListDokter LD,string spesialisasi,string tanggal){
 void deleteDokter(ListDokter &LD, string nama,string tanggal){
 	adr_dokter q = (LD).first;
 	if(q!=NULL){
+		bool flag = false;
 		while (q!=NULL) {
 			dokter d = (q)->info;
 			if (d.tanggal == tanggal && d.nama == nama) {
+				flag = true;
 				break;
 			}
 			q = (q)->next;
 		}
-		if((q)->next == NULL){
+		if((q)->next == NULL && (q)->prev != NULL){
 			adr_dokter c = (LD).last;
 			(LD).last = (c)->prev;
 			(c)->next = NULL;
 			(c)->prev = NULL;
 			((LD).last)->next = NULL;
-		}else if((q)->prev == NULL) {
+		}else if((q)->prev == NULL && (q)->next != NULL) {
 			adr_dokter c = (LD).first;
 			(LD).first = (c)->next;
 			(c)->next = NULL;
 			(c)->prev = NULL;	
 			((LD).first)->prev = NULL;
+		}else{
+			(LD).first = NULL;
 		}
+		if (flag) {
+			cout << "Dokter berhasil di hapus" << endl;
+		}else {
+			cout << "Dokter dengan nama " << nama << " tidak tersedia pada tanggal " << tanggal << endl;
+		}
+
 	}
 }
 adr_dokter findDokter(ListDokter LD,string spesialisasi,string tanggal){
@@ -141,6 +153,7 @@ void insertConnect(ListDokter &LD, adr_pasien newPasien,string spesialisasi,stri
 
 void deletePasienByID(ListDokter &LD, int id){
 	adr_dokter q = (LD).first;
+	bool flag = false;
 	if(q!=NULL){
 		adr_pasien mypasien;
 		adr_dokter mydokter;
@@ -166,7 +179,11 @@ void deletePasienByID(ListDokter &LD, int id){
 			(c)->next = (mypasien)->next;
 			(mypasien)->next = NULL;
 		}
-		cout << "Pasien berhasil di hapus" << endl;
+		if (flag) {
+			cout << "Pasien berhasil di hapus" << endl;
+		}else {
+			cout << "Pasien dengan id " << id << " tidak ada" << endl;
+		}
 	}else {
 		cout << "Data Pasien Kosong :( " << endl;
 	}
@@ -175,6 +192,7 @@ void deletePasienByID(ListDokter &LD, int id){
 
 void deletePasienByNama(ListDokter &LD, string nama){
 	adr_dokter q = (LD).first;
+	bool flag=false;
 	if(q!=NULL){
 		adr_pasien mypasien;
 		adr_dokter mydokter;
@@ -183,6 +201,7 @@ void deletePasienByNama(ListDokter &LD, string nama){
 			if((q)->child != NULL){
 				do{
 					if((d)->info.nama == nama){
+						flag = true;
 						mypasien = d;
 						mydokter = q;
 						if(mypasien == (mydokter)->child){
@@ -202,7 +221,11 @@ void deletePasienByNama(ListDokter &LD, string nama){
 			}
 			q = (q)->next;
 		}
-		cout << "Pasien berhasil di hapus" << endl;
+		if (flag) {
+			cout << "Pasien berhasil di hapus" << endl;
+		}else {
+			cout << "Pasien dengan nama " << nama << " tidak ada" << endl;
+		}
 	}else {
 		cout << "Data Pasien Kosong :( " << endl;
 	}

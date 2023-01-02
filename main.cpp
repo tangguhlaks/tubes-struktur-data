@@ -60,6 +60,11 @@ int main(){
 			string nama;
 			cout << "Nama : ";cin(nama);
 			deletePasienByNama(LD,nama);
+		}else if (x==8) {
+			string nama,tanggal;
+			cout << "Nama : ";cin(nama);
+			cout << "Tanggal : ";cin(tanggal);
+			deleteDokter(LD,nama,tanggal);
 		}else if(x==0){
 			cout << "Sampai Jumpa :)" << endl;
 			break;
