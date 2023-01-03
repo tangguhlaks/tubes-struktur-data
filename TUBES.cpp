@@ -46,21 +46,6 @@ void showDokter(ListDokter LD){
 	}
 }
 
-//Farhan
-void createPasien(ListPasien &LP){
-	(LP).first =NULL;
-	(LP).last = NULL;
-}
-
-adr_pasien createElementPasien(pasien data){
-	adr_pasien p =  new element_pasien;
-	(p)->next = NULL;
-	(p)->prev = NULL;
-	(p)->info = data;
-	(p)->mydokter =NULL;
-	return p;
-}
-
 bool checkDokter(ListDokter LD,string spesialisasi,string tanggal){
 	adr_dokter q = (LD).first;
 	bool ans=false;
@@ -106,6 +91,7 @@ void deleteDokter(ListDokter &LD, string nama,string tanggal){
 
 	}
 }
+
 adr_dokter findDokter(ListDokter LD,string spesialisasi,string tanggal){
 	adr_dokter q = (LD).first;
 	adr_dokter ans;
@@ -119,6 +105,52 @@ adr_dokter findDokter(ListDokter LD,string spesialisasi,string tanggal){
 		}while(q != (LD).first);
 	}
 	return ans;
+}
+
+void setHasilPemeriksaan(ListPasien &LP,int id){
+	adr_pasien q = (LP).first;
+	if(q!=NULL){
+		while (q!=NULL) {
+			if((q)->info.id == id){
+				adr_dokter d = (q)->mydokter;
+				string hasil;
+				cout << "Hasil Pemeriksaan : ";cin(hasil);
+				(q)->info.hasil = hasil;
+				int biaya = 100000;
+				if((d)->info.spesialisasi == "umum" ||(d)->info.spesialisasi == "Umum" || (d)->info.spesialisasi == "UMUM"){
+				biaya =200000;
+				}
+				if((q)->info.jenis == "BPJS" && biaya > 500000){
+					biaya -= 500000;
+				}else if ((q)->info.jenis == "BPJS" && biaya <= 500000) {
+					biaya = 0;
+				}
+				(q)->info.biaya_dokter =biaya;
+				cout << "Hasil pemeriksaan pasien berhasil diperbaharui " << endl;
+				return;
+			}
+			q = (q)->next;
+		}
+		cout << "Pasien dengan ID " << id << " tidak ditemukan" << endl; 
+	}else {
+		cout << "Data Pasien Kosong :( " << endl;
+	}
+
+}
+
+//Farhan
+void createPasien(ListPasien &LP){
+	(LP).first =NULL;
+	(LP).last = NULL;
+}
+
+adr_pasien createElementPasien(pasien data){
+	adr_pasien p =  new element_pasien;
+	(p)->next = NULL;
+	(p)->prev = NULL;
+	(p)->info = data;
+	(p)->mydokter =NULL;
+	return p;
 }
 
 void insertConnect(ListDokter &LD, adr_pasien newPasien,string spesialisasi,string tanggal,ListPasien &LP){
@@ -164,8 +196,8 @@ void deletePasienByID(ListPasien &LP, int id){
 				((LP).first)->prev = NULL;
 				q =NULL;
 			}else{
-				((q)->prev)->next = (q)->next;
-				((q)->next)->prev = (q)->prev;
+				(LP).first = NULL;
+				(LP).last = NULL;
 				q =NULL;
 			}
 			cout << "Pasien berhasil di hapus" << endl;
@@ -224,6 +256,10 @@ void showPasien(ListPasien LP){
 			cout << "Jenis Pasien (BPJS atau non BPJS) : "<<(q)->info.jenis << endl;
 			cout << "Nama Dokter : " << (d)->info.nama << endl;
 			cout << "Spesialisasi : " << (d)->info.spesialisasi << endl << endl;
+			if((q)->info.hasil != "-"){
+					cout << "Hasil Pemeriksaan : " << (q)->info.hasil << endl;
+					cout << "Biaya : " << (q)->info.biaya_dokter << endl;
+				}
 			q = (q)->next;
 		}
 		cout << endl;
@@ -282,34 +318,4 @@ void gantiJadwal(ListDokter &LD, ListPasien &LP, int id,string tanggal_baru){
 	}
 }
 
-void setHasilPemeriksaan(ListPasien &LP,int id){
-	adr_pasien q = (LP).first;
-	if(q!=NULL){
-		while (q!=NULL) {
-			if((q)->info.id == id){
-				adr_dokter d = (q)->mydokter;
-				string hasil;
-				cout << "Hasil Pemeriksaan : ";cin(hasil);
-				(q)->info.hasil = hasil;
-				int biaya = 100000;
-				if((d)->info.spesialisasi == "umum" ||(d)->info.spesialisasi == "Umum" || (d)->info.spesialisasi == "UMUM"){
-				biaya =200000;
-				}
-				if((q)->info.jenis == "BPJS" && biaya > 500000){
-					biaya -= 500000;
-				}else if ((q)->info.jenis == "BPJS" && biaya <= 500000) {
-					biaya = 0;
-				}
-				(q)->info.biaya_dokter =biaya;
-				cout << "Hasil pemeriksaan pasien berhasil diperbaharui " << endl;
-				return;
-			}
-			q = (q)->next;
-		}
-		cout << "Pasien dengan ID " << id << " tidak ditemukan" << endl; 
-	}else {
-		cout << "Data Pasien Kosong :( " << endl;
-	}
-
-}
 
